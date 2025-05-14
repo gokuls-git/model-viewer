@@ -1,45 +1,46 @@
-// src/App.js
+
 import React, { useState } from "react";
-import FileUploader from "./components/FileUploader";
+import DropzoneLoader from "./components/DropzoneLoader";
 import ModelViewer from "./components/ModelViewer";
+import ControlsPanel from "./components/ControlsPanel";
 
-const App = () => {
-  const [modelUrl, setModelUrl] = useState(null);
-  const [modelLoaded, setModelLoaded] = useState(false);
+export default function App() {
+  const [arrayBuffer, setArrayBuffer] = useState(null);
+  const [options, setOptions] = useState({
+    autoRotate: true,
+    wireframe: false,
+    background: "#191919",
+    ambientLight: "#ffffff",
+    directionalLight: "#ffffff",
+  });
 
-  const handleFileDrop = (acceptedFiles) => {
-    const file = acceptedFiles[0];
-    const url = URL.createObjectURL(file);
-    setModelUrl(url);
-    setModelLoaded(false);
-  };
-
-  const handleModelLoaded = () => {
-    setModelLoaded(true);
+  const handleModelLoaded = (buffer) => {
+    setArrayBuffer(buffer);
   };
 
   return (
-    <>
-      <header>
-        <h1>3D Shoe Model Viewer</h1>
-      </header>
-      <main>
-        
-        <section style={{ padding: "20px" }} className="wrapper">
-          {modelUrl && (
-            <>
-              {!modelLoaded && <div>Loading Model...</div>}
-              <ModelViewer
-                modelUrl={modelUrl}
-                onModelLoaded={handleModelLoaded}
-              />
-            </>
-          )}
-          <FileUploader onDrop={handleFileDrop} />
-        </section>
-      </main>
-    </>
+    <div style={{ height: "100vh", background: options.background }}>
+      <nav>
+        <h1 className="title" contenteditable="true">
+          <span>
+            <span>Business intelligence</span>
+            <br />
+            <span>built around</span>
+            <br />
+            <span>data teams</span>
+          </span>
+        </h1>
+      </nav>
+      <DropzoneLoader
+        onModelLoaded={handleModelLoaded}
+        isVisible={!arrayBuffer}
+      />
+      {arrayBuffer && (
+        <>
+          <ControlsPanel options={options} setOptions={setOptions} />
+          <ModelViewer arrayBuffer={arrayBuffer} options={options} />
+        </>
+      )}
+    </div>
   );
-};
-
-export default App;
+}
