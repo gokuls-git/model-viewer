@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import DropzoneLoader from "./components/DropzoneLoader";
 import ModelViewer from "./components/ModelViewer";
@@ -23,11 +22,13 @@ export default function App() {
       <nav>
         <h1 className="title" contenteditable="true">
           <span>
-            <span>Business intelligence</span>
+            <span className="text-[22px] font-bold text-[#c8f169]">
+              3D Model
+            </span>
             <br />
-            <span>built around</span>
+            <span className="text-amber-300">Viewer </span>
             <br />
-            <span>data teams</span>
+            <span className="text-[12px]">React Three Fiber</span>
           </span>
         </h1>
       </nav>
