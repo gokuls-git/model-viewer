@@ -42,6 +42,17 @@ export default function App() {
           <ModelViewer arrayBuffer={arrayBuffer} options={options} />
         </>
       )}
+
+      <footer className="bg-gray-900 py-4 text-center">
+        <a
+          href="https://github.com/gokuls-git/model-viewer"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white hover:text-green-400 font-semibold transition-colors duration-300"
+        >
+          GitHub
+        </a>
+      </footer>
     </div>
   );
 }
